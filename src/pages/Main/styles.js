@@ -115,14 +115,18 @@ export const Albuns = styled.div`
         margin-bottom: 10px;
     }
 
-    i {
-        font-size: 16px;
-        font-style: italic;
-        color: #333;
-    }
+    ol {
+        li {
+            border: 0;
+            padding: 0 3px 0 0;
 
-    i + i {
-        margin-top: 6px;
+            i {
+                font-size: 16px;
+                font-style: italic;
+                color: #333;
+                margin-top: 6px;
+            }
+        }
     }
 `;
 export const Musics = styled.div`
@@ -136,13 +140,17 @@ export const Musics = styled.div`
         margin-bottom: 10px;
     }
 
-    i {
-        font-size: 16px;
-        font-style: italic;
-        color: #333;
-    }
+    ol {
+        li {
+            border: 0;
+            padding: 0 3px 0 0;
 
-    i + i {
-        margin-top: 6px;
+            i {
+                font-size: 16px;
+                font-style: italic;
+                color: #333;
+                margin-top: 1px;
+            }
+        }
     }
 `;

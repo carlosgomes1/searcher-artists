@@ -19,15 +19,15 @@ function Main() {
     const [artist, setArtist] = useState([]);
     const [id, setId] = useState(1);
 
-    useEffect(() => {
-        console.log(artist);
-        console.log(artist.length);
-    }, [artist]);
+    const url = 'https://www.vagalume.com.br';
+
+    useEffect(() => {}, [artist]);
 
     async function handleSearchArtist(e) {
         e.preventDefault();
 
-        const searchOk = search.trim().toLowerCase().replace(' ', '-');
+        const searchOk = search.trim().toLowerCase().split(' ').join('-');
+        console.log(searchOk);
 
         try {
             const response = await api.get(`${searchOk}/index.js`);
@@ -39,7 +39,7 @@ function Main() {
                     photo: response.data.artist.pic_medium,
                     name: response.data.artist.desc,
                     genre: response.data.artist.genre[0].name,
-                    albumns: response.data.artist.albums.item,
+                    albums: response.data.artist.albums.item,
                     toplyrics: response.data.artist.toplyrics.item,
                 },
             ]);
@@ -86,7 +86,7 @@ function Main() {
                         }}
                     >
                         {' '}
-                        Esperando busca...{' '}
+                        Waiting for search...{' '}
                     </strong>
                 </div>
             ) : (
@@ -94,48 +94,37 @@ function Main() {
                     {artist.map((artist) => (
                         <li key={artist.id}>
                             <img
-                                src="https://i.pinimg.com/originals/66/c0/f3/66c0f3951cf18634e632c383284ab1f7.png"
-                                alt="Bob esponja"
+                                src={`${url}${artist.photo}`}
+                                alt={artist.name}
                             />
                             <Info>
-                                <strong> Bob Esponja </strong>
-                                <small> Desenho infantil </small>
+                                <strong> {artist.name} </strong>
+                                <small> {artist.genre} </small>
                                 <Area>
                                     <Albuns>
-                                        <strong> Top albuns: </strong>
-                                        <i>
-                                            {' '}
-                                            Test album here -{' '}
-                                            <small> 2020 </small>{' '}
-                                        </i>
-                                        <i>
-                                            {' '}
-                                            Test album here -{' '}
-                                            <small> 2020 </small>{' '}
-                                        </i>
-                                        <i>
-                                            {' '}
-                                            Test album here -{' '}
-                                            <small> 2020 </small>
-                                        </i>
-                                        <i>
-                                            {' '}
-                                            Test album here -{' '}
-                                            <small> 2020 </small>
-                                        </i>
-                                        <i>
-                                            {' '}
-                                            Test album here -{' '}
-                                            <small> 2020 </small>
-                                        </i>
+                                        <strong> All albums: </strong>
+                                        <ol>
+                                            {artist.albums.map((album) => (
+                                                <li key={album.id}>
+                                                    <i>
+                                                        {album.desc} -{' '}
+                                                        <small>
+                                                            {album.year}
+                                                        </small>
+                                                    </i>
+                                                </li>
+                                            ))}
+                                        </ol>
                                     </Albuns>
                                     <Musics>
-                                        <strong> Músicas mais tocadas: </strong>
-                                        <i> Test musics here </i>
-                                        <i> Test musics here </i>
-                                        <i> Test musics here </i>
-                                        <i> Test musics here </i>
-                                        <i> Test musics here </i>
+                                        <strong> Most played songs: </strong>
+                                        <ol>
+                                            {artist.toplyrics.map((music) => (
+                                                <li key={music.id}>
+                                                    <i> {music.desc} </i>
+                                                </li>
+                                            ))}
+                                        </ol>
                                     </Musics>
                                 </Area>
                             </Info>

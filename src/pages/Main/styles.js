@@ -5,7 +5,7 @@ export const Container = styled.div`
     width: 65%;
     margin: 40px auto;
     border-radius: 4px;
-    min-height: 200px;
+    min-height: 80px;
 `;
 
 export const Form = styled.form`
@@ -58,6 +58,10 @@ export const ListArtists = styled.ul`
     padding: 10px;
 
     list-style: none;
+
+    li + li {
+        margin-top: 10px;
+    }
 
     li {
         display: flex;
